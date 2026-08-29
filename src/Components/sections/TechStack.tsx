@@ -1,5 +1,5 @@
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { skillCategories } from "@/Data/skills";
+import { skillCategories } from "@/data/skills";
 
 export function TechStack() {
   return (

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/Badge";
-import { Card } from "@/Components/ui/Card";
+import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { projects } from "@/Data/projects";
+import { projects } from "@/data/projects";
 
 export function Projects() {
   return (

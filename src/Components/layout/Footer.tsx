@@ -7,7 +7,7 @@ export function Footer() {
         </p>
 
         <p>
-          Built with Next.js, TypeScript & Tailwind CSS.
+          Built with Next.js · TypeScript · Tailwind CSS · AI-assisted development.
         </p>
       </div>
     </footer>

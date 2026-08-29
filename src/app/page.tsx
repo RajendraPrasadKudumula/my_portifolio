@@ -1,12 +1,12 @@
-import { Navbar } from "@/Components/layout/Navbar";
-import { Hero } from "@/Components/sections/Hero";
-import { About } from "@/Components/sections/About";
-import { TechStack } from "@/Components/sections/TechStack";
-import { Projects } from "@/Components/sections/Projects";
-import { Experience } from "@/Components/sections/Experience";
-import { AIEngineering } from "@/Components/sections/AIEngineering";
-import { Contact } from "@/Components/sections/Contact";
-import { Footer } from "@/Components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { TechStack } from "@/components/sections/TechStack";
+import { Projects } from "@/components/sections/Projects";
+import { Experience } from "@/components/sections/Experience";
+import { AIEngineering } from "@/components/sections/AIEngineering";
+import { Contact } from "@/components/sections/Contact";
+import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
