@@ -1,64 +1,64 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  themeColor: "#050811",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://YOUR-DOMAIN.vercel.app"),
-
-  title: {
-    default: "Rajendra Prasad Kudumula | Senior Software Engineer",
-    template: "%s | Rajendra Prasad Kudumula",
-  },
-
+  title: "Rajendra Prasad Kudumula | Senior Full Stack & Backend Engineer (Node.js, NestJS, AWS, AI)",
   description:
-    "Senior Software Engineer specializing in Node.js, TypeScript, NestJS, PostgreSQL, AWS and AI-powered applications. Building scalable backend and full-stack systems.",
-
+    "Senior Software Engineer with 4+ years of experience in Node.js, NestJS, TypeScript, React, PostgreSQL, AWS, and AI Engineering. Proven track record building enterprise healthcare & AdTech systems.",
   keywords: [
     "Rajendra Prasad Kudumula",
     "Senior Software Engineer",
-    "Full Stack Developer",
+    "Full Stack Engineer",
     "Backend Engineer",
     "Node.js Developer",
     "NestJS Developer",
     "TypeScript Developer",
     "PostgreSQL",
-    "AWS",
+    "AWS S3 SQS",
+    "Snowflake",
+    "Microservices",
+    "REST APIs",
     "AI Engineer",
-    "LLM",
-    "RAG",
+    "LLM RAG",
+    "Bengaluru Software Engineer",
+    "Happiest Minds",
   ],
-
-  authors: [
-    {
-      name: "Rajendra Prasad Kudumula",
-    },
-  ],
-
+  authors: [{ name: "Rajendra Prasad Kudumula" }],
   creator: "Rajendra Prasad Kudumula",
-
   openGraph: {
     type: "website",
-    title: "Rajendra Prasad Kudumula | Senior Software Engineer",
+    locale: "en_US",
+    title: "Rajendra Prasad Kudumula | Senior Software Engineer (Full Stack & AI)",
     description:
-      "Senior Software Engineer specializing in Node.js, TypeScript, NestJS, PostgreSQL, AWS and AI-powered applications.",
-    siteName: "Rajendra Prasad Kudumula",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Rajendra Prasad Kudumula — Senior Software Engineer",
-      },
-    ],
+      "Senior Software Engineer with 4+ years building high-throughput microservices, scalable backend platforms, and AI-powered systems.",
+    siteName: "Rajendra Prasad Kudumula Portfolio",
   },
-
   twitter: {
     card: "summary_large_image",
     title: "Rajendra Prasad Kudumula | Senior Software Engineer",
     description:
-      "Senior Software Engineer specializing in scalable backend systems, full-stack applications and AI engineering.",
-    images: ["/og-image.png"],
+      "Senior Software Engineer specializing in Node.js, NestJS, TypeScript, React, PostgreSQL, AWS, and AI Engineering.",
   },
-
   robots: {
     index: true,
     follow: true,
@@ -71,8 +71,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth dark`}>
+      <body className="min-h-screen bg-[#050811] text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
+        {children}
+      </body>
     </html>
   );
 }

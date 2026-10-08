@@ -1,101 +1,198 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #050811;
+  --foreground: #f1f5f9;
+  --card-bg: rgba(15, 23, 42, 0.75);
+  --card-border: rgba(51, 65, 85, 0.6);
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-mono), monospace;
 }
 
-/* ================================
-   Animations
-================================ */
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Base styling */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
 }
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes terminal-enter {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Hero */
-
-.animate-fade-up {
-  animation: fade-up 0.7s ease-out both;
-}
-
-.animate-terminal-enter {
-  animation: terminal-enter 0.8s ease-out 200ms both;
-}
-
-/* About / General */
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out both;
-}
-
-/* Staggered animation delays */
-
-.animation-delay-100 {
-  animation-delay: 100ms;
-}
-
-.animation-delay-200 {
-  animation-delay: 200ms;
-}
-
-.animation-delay-300 {
-  animation-delay: 300ms;
-}
-
-/* Respect users who prefer reduced motion */
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-fade-in,
-  .animate-terminal-enter {
-    animation: none;
-  }
-}
-
-/* ================================
-   Base
-================================ */
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.15), transparent 70%),
+    radial-gradient(circle at 100% 40%, rgba(6, 182, 212, 0.08), transparent 40%),
+    radial-gradient(circle at 0% 70%, rgba(59, 130, 246, 0.06), transparent 40%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050811;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(13, 20, 36, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.15);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 30%, #93c5fd 80%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle grid background */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* ================================
+   3D ID Card & Pendulum Physics
+================================ */
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Idle Ambient Lanyard Swing */
+@keyframes lanyard-idle-swing {
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+  25% {
+    transform: rotate(2deg) translateY(-2px);
+  }
+  75% {
+    transform: rotate(-2deg) translateY(-1px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+}
+
+.animate-lanyard-idle {
+  transform-origin: top center;
+  animation: lanyard-idle-swing 6s ease-in-out infinite;
+}
+
+/* Touch/Click Impulse Swing Physics */
+@keyframes impulse-swing {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  18% {
+    transform: rotate(9deg) translateY(-6px) scale(1.02);
+  }
+  35% {
+    transform: rotate(-7deg) translateY(-3px) scale(1.01);
+  }
+  50% {
+    transform: rotate(4.5deg) translateY(-1px);
+  }
+  65% {
+    transform: rotate(-2.5deg);
+  }
+  80% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-impulse-swing {
+  transform-origin: top center;
+  animation: impulse-swing 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Holographic Foil Layer */
+.holographic-foil {
+  background: linear-gradient(
+    115deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.12) 30%,
+    rgba(96, 165, 250, 0.25) 45%,
+    rgba(244, 114, 182, 0.25) 55%,
+    rgba(52, 211, 153, 0.25) 65%,
+    rgba(255, 255, 255, 0.12) 75%,
+    transparent 85%
+  );
+  background-size: 250% 250%;
+}
+
+/* Animations */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-lanyard-idle,
+  .animate-impulse-swing {
+    animation: none !important;
+  }
 }
